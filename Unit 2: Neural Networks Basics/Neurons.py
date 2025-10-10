@@ -183,9 +183,11 @@ class AdalineSGD(object):
 
 class AdalineMBGD(object):
 
-    def __init__(self, eta=0.01, n_epochs=20, shuffle = True, random_seed=1):
+    def __init__(self, eta=0.01, n_epochs=20, 
+                 shuffle = True, batchsize = 32, random_seed=1):
         self.eta = eta
         self.n_epochs = n_epochs
+        self.batchsize = batchsize
         self.shuffle = shuffle
         self.random_seed = random_seed
 
@@ -211,7 +213,7 @@ class AdalineMBGD(object):
 
             cost = 0
 
-            for start in range(0, X.shape[0], 10): # Mini-batch size of 10
+            for start in range(0, X.shape[0], self.batchsize): # Mini-batch size of batchsize
                 end = start + 10
                 X_mini = X[start:end,:]
                 Y_mini = Y[start:end]
