@@ -1,27 +1,27 @@
-#############################################################
-# Neurons module
-# 
-# Author: Dr. Jared McBride (10-9-2025, Buena Vista, VA)
-# 
-# This file contains the array of 4 different artificial neurons.
-# They were developed in class as part a unit of neural networks 
-# basics.
-# 
-# These are based of the perceptron and adiline models from Raschka
-# from his book "Python Machine Learning" (3rd edition). As well as
-# the perceptron model found in David McKay's book "Information
-# Theory, Inference and Learning Algorithms".
-#
-# The file is organized as follows:
-# 1. Import libraries
-# 2. Neuron classes
-#    2.1 Perceptron (Raschka)
-#    2.2 Adaline
-#    2.3 Adaline Stochastic Gradient Descent
-#    2.4 Adaline Mini-Batch Gradient Descent
-#    2.5 Perceptron (McKay)
-#
-#############################################################
+"""
+Neurons module
+
+Author: Dr. Jared McBride (10-9-2025, Buena Vista, VA)
+
+This file contains the array of 4 different artificial neurons.
+They were developed in class as part a unit of neural networks 
+basics.
+
+These are based of the perceptron and adiline models from Raschka
+from his book "Python Machine Learning" (3rd edition). As well as
+the perceptron model found in David McKay's book "Information
+Theory, Inference and Learning Algorithms".
+
+The file is organized as follows:
+1. Import libraries
+2. Neuron classes
+   2.1 Perceptron (Raschka)
+   2.2 Adaline
+   2.3 Adaline Stochastic Gradient Descent
+   2.4 Adaline Mini-Batch Gradient Descent
+   2.5 Perceptron (McKay)
+"""
+
 
 import numpy as np
 
