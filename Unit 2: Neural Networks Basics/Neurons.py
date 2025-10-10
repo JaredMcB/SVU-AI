@@ -3,14 +3,14 @@ Neurons module
 
 Author: Dr. Jared McBride (10-9-2025, Buena Vista, VA)
 
-This file contains the array of 4 different artificial neurons.
+This file contains the array of 5 different artificial neurons.
 They were developed in class as part a unit of neural networks 
 basics.
 
 These are based of the perceptron and adiline models from Raschka
 from his book "Python Machine Learning" (3rd edition). As well as
 the perceptron model found in David McKay's book "Information
-Theory, Inference and Learning Algorithms".
+Theory, Inference and Learning Algorithms."
 
 The file is organized as follows:
 1. Import libraries
@@ -87,7 +87,11 @@ class Adaline(object):
 
         for j in range(self.n_epochs):
             # Y - phi(z) NOT the final prediction which includes thresholding
-            errors = Y - (np.dot(X, self.w_[1:]) + self.w_[0]) # The whole vector of targets minus predictions of all X
+            activity = np.dot(X, self.w_[1:]) + self.w_[0]
+
+            # Y_tilde is yhat before thresholding
+            Y_tilde = self.activation(activity)
+            errors = Y - Y_tilde # The whole vector of targets minus predictions of all X
             
             # errors is n by 1 , X is n by p (number features)
             dw = self.eta * np.array([sum(errors * X[:,j]) for j in range(X.shape[1])])
@@ -106,6 +110,10 @@ class Adaline(object):
         # Adaline uses f(z) = z as activation then thresholds after
         yhat = np.where(z >= 0, 1, -1) # Predictions made by thresholding
         return yhat
+       
+    def activation(self, z)
+        # Adaline used itentity function as activation
+        return z
     
 
 #############################################################
@@ -162,8 +170,10 @@ class AdalineSGD(object):
     
     def predict(self, X):
         z = self.w_ @ np.c_[np.ones(X.shape[0]), X].T # Activity
-        # Adaline uses f(z) = z as activation then thresholds after
-        yhat = np.where(z >= 0, 1, -1) # Predictions made by thresholding
+        y_tilde = self.activation(z)
+        
+       # Adaline uses f(z) = z as activation then thresholds after
+        yhat = np.where(y_tilde >= 0, 1, -1) # Predictions made by thresholding
         return yhat
     
     def activation(self, z):
@@ -205,9 +215,14 @@ class AdalineMBGD(object):
                 end = start + 10
                 X_mini = X[start:end,:]
                 Y_mini = Y[start:end]
+               
+                # Y - phi(z) NOT the final prediction which includes thresholding
+                activity = np.dot(X_mini, self.w_[1:]) + self.w_[0]
 
-                errors = Y_mini - (np.dot(X_mini, self.w_[1:]) + self.w_[0]) # The whole vector of targets minus predictions of all X
-            
+                # Y_tilde is yhat before thresholding
+                Y_tilde = self.activation(activity)
+                errors = Y_mini - Y_tilde # The whole vector of targets minus predictions of all X
+
                 # errors is n by 1 , X is n by p (number features)
                 dw = self.eta * np.array([sum(errors * X_mini[:,j]) for j in range(X_mini.shape[1])])
 
