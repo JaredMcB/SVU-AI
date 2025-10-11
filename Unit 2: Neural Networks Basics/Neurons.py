@@ -111,7 +111,7 @@ class Adaline(object):
         yhat = np.where(z >= 0, 1, -1) # Predictions made by thresholding
         return yhat
        
-    def activation(self, z)
+    def activation(self, z):
         # Adaline used itentity function as activation
         return z
     
