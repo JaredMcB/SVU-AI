@@ -214,7 +214,7 @@ class AdalineMBGD(object):
             cost = 0
 
             for start in range(0, X.shape[0], self.batchsize): # Mini-batch size of batchsize
-                end = start + 10
+                end = start + self.batchsize
                 X_mini = X[start:end,:]
                 Y_mini = Y[start:end]
                
